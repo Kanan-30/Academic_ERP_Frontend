@@ -1,5 +1,6 @@
+
+
 // import React, { useState } from "react";
-// import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 // import adminService from "../services/adminService";
 
 // const Login = ({ onLogin }) => {
@@ -19,47 +20,52 @@
 //   };
 
 //   return (
-//     <Box
-//       display="flex"
-//       flexDirection="column"
-//       alignItems="center"
-//       justifyContent="center"
-//       minHeight="100vh"
-//     >
-//       <Typography variant="h4" gutterBottom>
-//         Admin Login
-//       </Typography>
-//       <form onSubmit={handleSubmit} style={{ width: "300px" }}>
-//         <TextField
-//           fullWidth
-//           label="Username"
-//           variant="outlined"
-//           margin="normal"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-//         <TextField
-//           fullWidth
-//           type="password"
-//           label="Password"
-//           variant="outlined"
-//           margin="normal"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-//         {error && <Alert severity="error">{error}</Alert>}
-//         <Button type="submit" variant="contained" color="primary" fullWidth>
-//           Login
-//         </Button>
-//       </form>
-//     </Box>
+//     <div className="d-flex align-items-center justify-content-center vh-100">
+//       <div className="card p-4" style={{ width: "300px" }}>
+//         <h4 className="card-title text-center mb-4">Admin Login</h4>
+//         <form onSubmit={handleSubmit}>
+//           <div className="mb-3">
+//             <label htmlFor="username" className="form-label">
+//               Username
+//             </label>
+//             <input
+//               type="text"
+//               id="username"
+//               className="form-control"
+//               value={username}
+//               onChange={(e) => setUsername(e.target.value)}
+//             />
+//           </div>
+//           <div className="mb-3">
+//             <label htmlFor="password" className="form-label">
+//               Password
+//             </label>
+//             <input
+//               type="password"
+//               id="password"
+//               className="form-control"
+//               value={password}
+//               onChange={(e) => setPassword(e.target.value)}
+//             />
+//           </div>
+//           {error && (
+//             <div className="alert alert-danger" role="alert">
+//               {error}
+//             </div>
+//           )}
+//           <button type="submit" className="btn btn-primary w-100">
+//             Login
+//           </button>
+//         </form>
+//       </div>
+//     </div>
 //   );
 // };
 
 // export default Login;
 
-
 import React, { useState } from "react";
+import { FaUserLock } from "react-icons/fa"; // Admin login icon
 import adminService from "../services/adminService";
 
 const Login = ({ onLogin }) => {
@@ -79,9 +85,16 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="d-flex align-items-center justify-content-center vh-100">
-      <div className="card p-4" style={{ width: "300px" }}>
-        <h4 className="card-title text-center mb-4">Admin Login</h4>
+    <div
+      className="container d-flex flex-column align-items-center justify-content-center vh-100"
+      style={{ backgroundColor: "#f8f9fa", color: "#333" }}
+    >
+      <div className="text-center mb-4">
+        {/* Admin Login Icon */}
+        <FaUserLock size={60} className="mb-3" color="#343a40" />
+        <h1>Admin Login</h1>
+      </div>
+      <div className="card p-4 shadow" style={{ width: "400px" }}>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
@@ -93,6 +106,7 @@ const Login = ({ onLogin }) => {
               className="form-control"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username"
             />
           </div>
           <div className="mb-3">
@@ -105,14 +119,19 @@ const Login = ({ onLogin }) => {
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
             />
           </div>
           {error && (
-            <div className="alert alert-danger" role="alert">
+            <div
+              className="alert alert-danger"
+              role="alert"
+              style={{ backgroundColor: "#ff4d4d", color: "#fff" }}
+            >
               {error}
             </div>
           )}
-          <button type="submit" className="btn btn-primary w-100">
+          <button type="submit" className="btn btn-dark w-100">
             Login
           </button>
         </form>
