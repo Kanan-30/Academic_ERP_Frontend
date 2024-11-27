@@ -18,7 +18,7 @@ const StudentProfile = ({ token }) => {
         setStudent(data);
       } catch (err) {
         console.error("Error fetching student:", err.message);
-        alert("Failed to fetch student details.");
+        // alert("Failed to fetch student details.");
       } finally {
         setLoading(false);
       }
