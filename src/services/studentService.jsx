@@ -17,7 +17,6 @@ export const getStudentDetails = async (studentId, token) => {
 };
 
 export const updateStudentDetails = async (studentId, data, token) => {
-  // Flatten educationDetails into the payload
   const educationDetails = data.educationDetails || {};
 
   const payload = {

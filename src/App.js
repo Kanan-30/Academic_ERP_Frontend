@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
-import UpdateStudent from "./components/EditStudent";
+// import UpdateStudent from "./components/EditStudent";
 import StudentProfile from "./components/StudentProfile";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -28,10 +28,10 @@ const App = () => {
     path="/student-profile/:studentId"
     element={token ? <StudentProfile token={token} /> : <Navigate to="/login" />}
   />
-  <Route
+  {/* <Route
     path="/update-student/:id"
     element={token ? <UpdateStudent token={token} /> : <Navigate to="/login" />}
-  />
+  /> */}
   <Route path="*" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
 </Routes>
 

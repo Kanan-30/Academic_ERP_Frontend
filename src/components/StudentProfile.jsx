@@ -96,12 +96,15 @@ const StudentProfile = ({ token }) => {
     educationDetails,
   } = student;
 
+    const imageUrl = photographPath
+    ? `http://localhost:8080${photographPath}` // Ensure this is the correct path
+    : null;
+
   return (
     <div
       className="container mt-5"
       style={{ backgroundColor: "#f8f9fa", color: "#333", padding: "20px", borderRadius: "10px" }}
     >
-      {/* Success Message */}
       {successMessage && (
         <div
           className="alert alert-success text-center"
@@ -115,12 +118,12 @@ const StudentProfile = ({ token }) => {
       <div className="card p-4 shadow mb-4">
         <div className="row align-items-center">
           <div className="col-md-4 text-center">
-            {photographPath ? (
+            {imageUrl ? (
               <img
-                src={`http://localhost:8080/uploads${photographPath}`}
+              src={imageUrl}
                 alt="Profile"
                 className="profile-image"
-                style={{ maxWidth: "150px", borderRadius: "50%" }}
+                style={{ maxWidth: "250px", borderRadius: "50%" }}
               />
             ) : (
               <FaUserCircle size={100} color="#6c757d" />
