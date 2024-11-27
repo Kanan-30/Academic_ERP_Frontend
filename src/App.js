@@ -21,12 +21,6 @@ const App = () => {
   return (
     <Router>
       <Navbar isAuthenticated={!!token} onLogout={handleLogout} />
-      {/* <Routes>
-  <Route path="/login" element={!token ? <Login onLogin={setToken} /> : <Navigate to="/dashboard" />} />
-  <Route path="/dashboard" element={token ? <Dashboard token={token} /> : <Navigate to="/login" />} />
-  <Route path="/update-student/:id" element={token ? <UpdateStudent token={token} /> : <Navigate to="/login" />} />
-  <Route path="*" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
-</Routes> */}
 <Routes>
   <Route path="/login" element={!token ? <Login onLogin={setToken} /> : <Navigate to="/dashboard" />} />
   <Route path="/dashboard" element={token ? <Dashboard token={token} /> : <Navigate to="/login" />} />
