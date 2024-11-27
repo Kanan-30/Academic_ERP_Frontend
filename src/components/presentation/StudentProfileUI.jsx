@@ -1,87 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
-import { getStudentDetails, updateStudentDetails } from "../services/studentService";
+import React from 'react';
+import { FaUserCircle } from 'react-icons/fa';
 
-const StudentProfile = ({ token }) => {
-  const { studentId } = useParams();
-  const [student, setStudent] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editFields, setEditFields] = useState({});
-  const [successMessage, setSuccessMessage] = useState(""); // State for success message
 
-  useEffect(() => {
-    const fetchStudent = async () => {
-      try {
-        const data = await getStudentDetails(studentId, token);
-        setStudent(data);
-      } catch (err) {
-        console.error("Error fetching student:", err.message);
-        alert("Failed to fetch student details.");
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchStudent();
-  }, [studentId, token]);
-
-  const handleInputChange = (field, value) => {
-    if (field.startsWith("educationDetails.")) {
-      const nestedField = field.split(".")[1];
-      setEditFields((prev) => ({
-        ...prev,
-        educationDetails: {
-          ...prev.educationDetails,
-          [nestedField]: value,
-        },
-      }));
-    } else {
-      setEditFields((prev) => ({ ...prev, [field]: value }));
-    }
-  };
-
-  const handleSave = async () => {
-    try {
-      const updatedData = {
-        ...student,
-        ...editFields,
-        educationDetails: {
-          ...student.educationDetails,
-          ...editFields.educationDetails,
-        },
-      };
-
-      await updateStudentDetails(studentId, updatedData, token);
-      setStudent(updatedData);
-      setEditFields({});
-      setIsEditing(false);
-
-      // Show success message
-      setSuccessMessage("Details updated successfully!");
-
-      // Clear the success message after 5 seconds
-      setTimeout(() => setSuccessMessage(""), 3000);
-    } catch (err) {
-      console.error("Error updating student:", err.message);
-      alert("Failed to update student details.");
-    }
-  };
-
-  const handleCancel = () => {
-    setEditFields({});
-    setIsEditing(false);
-  };
-
-  if (loading) {
-    return <div className="container mt-5 text-center">Loading student details...</div>;
-  }
-
-  if (!student) {
-    return <div className="container mt-5 text-center">Student not found.</div>;
-  }
-
+const StudentProfileUI = ({
+  student,
+  successMessage,
+  isEditing,
+  handleSetEditing,
+  handleInputChange,
+  handleSave,
+  handleCancel,
+  imageUrl,
+  studentId,
+  educationDetails,
+  domains,
+  specialisation
+}) => {
   const {
     rollNumber,
     firstName,
@@ -90,15 +25,7 @@ const StudentProfile = ({ token }) => {
     cgpa,
     totalCredits,
     graduationYear,
-    photographPath,
-    domains,
-    specialisation,
-    educationDetails,
   } = student;
-
-    const imageUrl = photographPath
-    ? `http://localhost:8080${photographPath}` // Ensure this is the correct path
-    : null;
 
   return (
     <div
@@ -120,7 +47,7 @@ const StudentProfile = ({ token }) => {
           <div className="col-md-4 text-center">
             {imageUrl ? (
               <img
-              src={imageUrl}
+                src={imageUrl}
                 alt="Profile"
                 className="profile-image"
                 style={{ maxWidth: "250px", borderRadius: "50%" }}
@@ -372,7 +299,7 @@ const StudentProfile = ({ token }) => {
             </button>
           </>
         ) : (
-          <button className="btn btn-primary" onClick={() => setIsEditing(true)}>
+          <button className="btn btn-primary" onClick={() => handleSetEditing(true)}>
             Modify Details
           </button>
         )}
@@ -381,4 +308,4 @@ const StudentProfile = ({ token }) => {
   );
 };
 
-export default StudentProfile;
+export default StudentProfileUI;

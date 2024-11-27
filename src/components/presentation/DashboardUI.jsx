@@ -1,19 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaGraduationCap } from "react-icons/fa"; // Importing an icon from react-icons
+import React from 'react';
+import { FaGraduationCap } from 'react-icons/fa';
 
-const Dashboard = ({ token }) => {
-  const [studentId, setStudentId] = useState("");
-  const navigate = useNavigate();
-
-  const fetchStudentDetails = () => {
-    if (studentId.trim() === "") {
-      alert("Please enter a Student ID");
-      return;
-    }
-    navigate(`/student-profile/${studentId}`);
-  };
-
+const DashboardUI = ({ studentId, setStudentId, fetchStudentDetails }) => {
   return (
     <div
       className="container d-flex flex-column align-items-center justify-content-center vh-100"
@@ -46,4 +34,4 @@ const Dashboard = ({ token }) => {
   );
 };
 
-export default Dashboard;
+export default DashboardUI;

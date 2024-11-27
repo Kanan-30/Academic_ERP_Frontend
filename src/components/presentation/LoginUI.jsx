@@ -1,30 +1,13 @@
-import React, { useState } from "react";
-import { FaUserLock } from "react-icons/fa"; // Admin login icon
-import adminService from "../services/adminService";
+import React from 'react';
+import { FaUserLock } from 'react-icons/fa';
 
-const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = await adminService.login({ username, password });
-      localStorage.setItem("token", token);
-      onLogin(token);
-    } catch (err) {
-      setError("Invalid credentials");
-    }
-  };
-
+const LoginUI = ({ username, setUsername, password, setPassword, handleSubmit, error }) => {
   return (
     <div
       className="container d-flex flex-column align-items-center justify-content-center vh-100"
       style={{ backgroundColor: "#f8f9fa", color: "#333" }}
     >
       <div className="text-center mb-4">
-        {/* Admin Login Icon */}
         <FaUserLock size={60} className="mb-3" color="#343a40" />
         <h1>Admin Login</h1>
       </div>
@@ -74,4 +57,4 @@ const Login = ({ onLogin }) => {
   );
 };
 
-export default Login;
+export default LoginUI;

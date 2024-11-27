@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
+import Navbar from "./components/presentation/Navbar";
+import Login from "./components/StudentsLIst/Login";
+import Dashboard from "./components/StudentsLIst/Dashboard";
 // import UpdateStudent from "./components/EditStudent";
-import StudentProfile from "./components/StudentProfile";
+import StudentProfile from "./components/StudentsLIst/StudentProfile";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
